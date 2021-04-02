@@ -29,25 +29,25 @@ public class SimpleQueryRepositoryTest {
         List<Object> dataSet = Stream.generate(() -> new Person().setAge(new Random().nextInt(100)).setName("person-"+ UUID.randomUUID())).limit(1000)
                 .collect(Collectors.toList());
 
-        // 构造 Where
+        // Where
         ExpressionNode whereExpression = new ExpressionNodeBuilder()
                 .firstExpression(new ObjectFieldFilterOpExpression("age", Integer.class, QueryObjectFieldFilterOpType.LT
                         , 1))
                 .buildResult();
         Where where = new Where(whereExpression);
 
-//        // 构造 GroupBy
-//        ExpressionNode groupExpressionNode = new ExpressionNodeBuilder()
-//                .firstExpression(new GroupByFieldExpression("age"))
-//                .appendExpression(new GroupFuncFieldExpression("age", GroupFuncType.COUNT), ExpressionOpType.NONE)
-//                .buildResult();
-//        GroupBy groupBy = new GroupBy(groupExpressionNode);
+        //  GroupBy
+         ExpressionNode groupExpressionNode = new ExpressionNodeBuilder()   
+        .firstExpression(new GroupByFieldExpression("age"))
+             .appendExpression(new GroupFuncFieldExpression("age", GroupFuncType.COUNT), ExpressionOpType.NONE)
+        .buildResult();
+        GroupBy groupBy = new GroupBy(groupExpressionNode);
 
-        // 构造 OrderBy
+        // OrderBy
         ExpressionNode orderByExpression = new ExpressionNodeBuilder().firstExpression(new OrderByFiledExpression("age", OrderDirection.DESC)).buildResult();
         OrderBy orderBy = new OrderBy(orderByExpression);
 
-        // 构造 Limit
+        // Limit
         ExpressionNode limitExpressionNode = new ExpressionNodeBuilder().firstExpression(new LimitExpression(1, 100)).buildResult();
         Limit limit = new Limit(limitExpressionNode);
 
