@@ -31,7 +31,7 @@ public class SimpleQueryRepositoryTest {
 
         // Where
         ExpressionNode whereExpression = new ExpressionNodeBuilder()
-                .firstExpression(new ObjectFieldFilterOpExpression("age", Integer.class, QueryObjectFieldFilterOpType.LT
+                .firstExpression(new ObjectFieldFilterOpExpression("age", Integer.class, QueryObjectFieldFilterOpType.NE
                         , 1))
                 .buildResult();
         Where where = new Where(whereExpression);
